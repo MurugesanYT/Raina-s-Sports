@@ -27,12 +27,21 @@ import {
   Shield,
   Flame,
   Medal,
-  Clock
+  Clock,
+  BookOpen
 } from 'lucide-react';
 import { useState } from 'react';
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 
 const quickNavItems = [
+  {
+    title: 'Training Programs',
+    description: 'Explore our comprehensive sports training programs with detailed curriculum',
+    href: '/programs',
+    icon: BookOpen,
+    color: 'from-purple-500 to-purple-600',
+    features: ['Detailed Curriculum', 'Expert Coaching', 'All Skill Levels']
+  },
   {
     title: 'Class Schedules',
     description: 'View our comprehensive training schedule with real-time availability',
@@ -143,13 +152,13 @@ const Index = () => {
                     Book Free Consultation
                   </Button>
                 </DialogTrigger>
-                <DialogContent className="max-w-md">
+                <DialogContent className="max-w-4xl max-h-[90vh] overflow-hidden">
                   <BookingForm onClose={() => setShowBooking(false)} />
                 </DialogContent>
               </Dialog>
               
               <Button asChild variant="outline" size="lg" className="border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground px-8 py-3 text-lg">
-                <Link to="/schedule" className="flex items-center space-x-2">
+                <Link to="/programs" className="flex items-center space-x-2">
                   <Star className="h-5 w-5" />
                   <span>View Programs</span>
                 </Link>
@@ -222,14 +231,14 @@ const Index = () => {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
             {quickNavItems.map((item, index) => (
               <Card key={index} className="overflow-hidden group hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border-0 bg-gradient-to-br from-white to-gray-50 dark:from-slate-800 dark:to-slate-900">
                 <CardHeader className={`bg-gradient-to-r ${item.color} text-white relative overflow-hidden`}>
                   <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-16 translate-x-16"></div>
                   <div className="flex items-center space-x-3 relative z-10">
                     <item.icon className="h-8 w-8" />
-                    <CardTitle className="text-xl">{item.title}</CardTitle>
+                    <CardTitle className="text-lg">{item.title}</CardTitle>
                   </div>
                 </CardHeader>
                 <CardContent className="p-6">
@@ -265,13 +274,22 @@ const Index = () => {
             Join thousands of athletes who have transformed their lives through our programs.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" variant="secondary" className="px-8 py-3">
-              <Clock className="h-5 w-5 mr-2" />
-              Schedule Free Trial
-            </Button>
-            <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-teal-600 px-8 py-3">
-              <Trophy className="h-5 w-5 mr-2" />
-              View Success Stories
+            <Dialog open={showBooking} onOpenChange={setShowBooking}>
+              <DialogTrigger asChild>
+                <Button size="lg" variant="secondary" className="px-8 py-3">
+                  <Clock className="h-5 w-5 mr-2" />
+                  Schedule Free Trial
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="max-w-4xl max-h-[90vh] overflow-hidden">
+                <BookingForm onClose={() => setShowBooking(false)} />
+              </DialogContent>
+            </Dialog>
+            <Button asChild size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-teal-600 px-8 py-3">
+              <Link to="/reviews" className="flex items-center space-x-2">
+                <Trophy className="h-5 w-5" />
+                <span>View Success Stories</span>
+              </Link>
             </Button>
           </div>
         </div>

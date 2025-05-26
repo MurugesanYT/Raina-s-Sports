@@ -28,19 +28,30 @@ let analytics;
 let database;
 
 try {
+  console.log('Initializing Firebase with config:', {
+    apiKey: firebaseConfig.apiKey ? 'Present' : 'Missing',
+    databaseURL: firebaseConfig.databaseURL ? 'Present' : 'Missing',
+    projectId: firebaseConfig.projectId ? 'Present' : 'Missing'
+  });
+  
   app = initializeApp(firebaseConfig);
   database = getDatabase(app);
+  
+  console.log('Firebase app initialized successfully');
+  console.log('Database instance created:', database ? 'Success' : 'Failed');
   
   // Initialize Analytics only if supported (client-side)
   if (typeof window !== 'undefined') {
     isSupported().then((supported) => {
       if (supported) {
         analytics = getAnalytics(app);
+        console.log('Firebase Analytics initialized');
+      } else {
+        console.log('Firebase Analytics not supported in this environment');
       }
     });
   }
   
-  console.log('Firebase initialized successfully');
 } catch (error) {
   console.error('Firebase initialization failed:', error);
 }

@@ -131,7 +131,7 @@ export function FeaturedPrograms() {
 
         {/* Booking Dialog */}
         <Dialog open={showBooking} onOpenChange={setShowBooking}>
-          <DialogContent className="max-w-md">
+          <DialogContent className="max-w-4xl max-h-[90vh] overflow-hidden">
             <BookingForm 
               onClose={() => setShowBooking(false)} 
               selectedProgram={selectedProgram}
