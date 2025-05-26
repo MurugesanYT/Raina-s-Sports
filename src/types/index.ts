@@ -8,6 +8,9 @@ export interface CoachDetails {
   email: string;
   profileImageUrl: string;
   dataAiHint: string;
+  experience?: string;
+  achievements?: string[];
+  motto?: string;
 }
 
 export interface TrainingSpecialty {
@@ -22,6 +25,11 @@ export interface ScheduleItem {
   sport: string;
   description?: string;
   location?: string;
+  duration?: string;
+  level?: 'Beginner' | 'Intermediate' | 'Advanced';
+  maxParticipants?: number;
+  currentParticipants?: number;
+  price?: number;
 }
 
 export interface GalleryMedia {
@@ -31,6 +39,8 @@ export interface GalleryMedia {
   alt: string;
   title?: string;
   dataAiHint: string;
+  category?: string;
+  featured?: boolean;
 }
 
 export interface Review {
@@ -39,4 +49,31 @@ export interface Review {
   rating: number;
   comment: string;
   date: string;
+  sport?: string;
+  verified?: boolean;
+  avatar?: string;
+}
+
+export interface BookingData {
+  name: string;
+  email: string;
+  phone: string;
+  sport: string;
+  preferredTime: string;
+  message?: string;
+  experience: 'Beginner' | 'Intermediate' | 'Advanced';
+}
+
+export interface ProgressData {
+  date: string;
+  metric: string;
+  value: number;
+  goal: number;
+}
+
+export interface NotificationSettings {
+  email: boolean;
+  push: boolean;
+  sms: boolean;
+  reminders: boolean;
 }
