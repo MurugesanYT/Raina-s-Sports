@@ -54,7 +54,7 @@ const programsData = {
     ],
     equipment: ["Professional footballs", "Training cones", "Goal posts", "Fitness equipment", "Video analysis tools"],
     ageGroups: ["Under 12", "Under 16", "Under 21", "Adult (21+)"],
-    testimonial: "This program transformed my game completely. I went from playing local matches to being scouted by professional clubs!" - Arjun P., Age 19
+    testimonial: "This program transformed my game completely. I went from playing local matches to being scouted by professional clubs! - Arjun P., Age 19"
   },
   volleyball: {
     title: "Volleyball Excellence",
@@ -88,7 +88,7 @@ const programsData = {
     ],
     equipment: ["Official volleyballs", "Net systems", "Training equipment", "Jump training tools", "Video analysis"],
     ageGroups: ["Youth (12-16)", "Junior (16-18)", "Senior (18+)", "Masters (35+)"],
-    testimonial: "The training intensity and technique focus helped me make my state team. The coaches really know how to bring out the best in you!" - Priya S., Age 17
+    testimonial: "The training intensity and technique focus helped me make my state team. The coaches really know how to bring out the best in you! - Priya S., Age 17"
   },
   yoga: {
     title: "Yoga & Meditation",
@@ -122,7 +122,7 @@ const programsData = {
     ],
     equipment: ["Yoga mats", "Blocks and straps", "Meditation cushions", "Essential oils", "Calming music"],
     ageGroups: ["Kids (8-12)", "Teens (13-17)", "Adults (18-60)", "Seniors (60+)"],
-    testimonial: "This program changed my life! I'm more flexible, calm, and focused than ever before. It's the perfect complement to my athletic training." - Rahul M., Age 25
+    testimonial: "This program changed my life! I am more flexible, calm, and focused than ever before. It is the perfect complement to my athletic training. - Rahul M., Age 25"
   }
 };
 
