@@ -1,4 +1,3 @@
-
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -154,11 +153,6 @@ const Index = () => {
                   <Star className="h-5 w-5" />
                   <span>View Programs</span>
                 </Link>
-              </Button>
-              
-              <Button variant="ghost" size="lg" className="text-primary hover:bg-primary/10 px-8 py-3 text-lg">
-                <Play className="h-5 w-5 mr-2" />
-                Watch Story
               </Button>
             </div>
 

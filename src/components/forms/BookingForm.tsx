@@ -8,20 +8,27 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { useToast } from '@/hooks/use-toast';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { CalendarDays, Clock, User, Phone, Mail } from 'lucide-react';
+import { CalendarDays, User, Phone, Mail, Award } from 'lucide-react';
+import { database } from '@/lib/firebase';
+import { ref, push } from 'firebase/database';
 
 interface BookingFormProps {
   onClose: () => void;
+  selectedProgram?: string;
 }
 
-export function BookingForm({ onClose }: BookingFormProps) {
+export function BookingForm({ onClose, selectedProgram }: BookingFormProps) {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     phone: '',
-    sport: '',
+    sport: selectedProgram || '',
     preferredTime: '',
     experience: '',
+    age: '',
+    emergencyContact: '',
+    medicalConditions: '',
+    goals: '',
     message: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -31,16 +38,48 @@ export function BookingForm({ onClose }: BookingFormProps) {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 2000));
+    try {
+      // Save to Firebase Realtime Database
+      const bookingsRef = ref(database, 'bookings');
+      const newBooking = {
+        ...formData,
+        timestamp: new Date().toISOString(),
+        status: 'pending'
+      };
+      
+      await push(bookingsRef, newBooking);
 
-    toast({
-      title: "Booking Confirmed!",
-      description: "We'll contact you within 24 hours to schedule your consultation.",
-    });
+      toast({
+        title: "Booking Confirmed!",
+        description: "Your consultation request has been saved. We'll contact you within 24 hours.",
+      });
 
-    setIsSubmitting(false);
-    onClose();
+      // Reset form
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        sport: selectedProgram || '',
+        preferredTime: '',
+        experience: '',
+        age: '',
+        emergencyContact: '',
+        medicalConditions: '',
+        goals: '',
+        message: ''
+      });
+
+      setIsSubmitting(false);
+      onClose();
+    } catch (error) {
+      console.error('Error saving booking:', error);
+      toast({
+        title: "Error",
+        description: "Failed to save booking. Please try again.",
+        variant: "destructive"
+      });
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -55,7 +94,7 @@ export function BookingForm({ onClose }: BookingFormProps) {
         </p>
       </CardHeader>
       
-      <CardContent className="space-y-4">
+      <CardContent className="space-y-4 max-h-[70vh] overflow-y-auto">
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="grid grid-cols-1 gap-4">
             <div>
@@ -100,28 +139,57 @@ export function BookingForm({ onClose }: BookingFormProps) {
                 required
               />
             </div>
+
+            <div>
+              <Label htmlFor="age">Age</Label>
+              <Input
+                id="age"
+                type="number"
+                value={formData.age}
+                onChange={(e) => setFormData(prev => ({ ...prev, age: e.target.value }))}
+                placeholder="Enter your age"
+                required
+              />
+            </div>
             
             <div>
               <Label>Sport/Program Interest</Label>
-              <Select onValueChange={(value) => setFormData(prev => ({ ...prev, sport: value }))}>
+              <Select 
+                value={formData.sport}
+                onValueChange={(value) => setFormData(prev => ({ ...prev, sport: value }))}
+              >
                 <SelectTrigger>
                   <SelectValue placeholder="Select a sport or program" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="football">Football</SelectItem>
-                  <SelectItem value="volleyball">Volleyball</SelectItem>
+                  <SelectItem value="Elite Football Training">Elite Football Training</SelectItem>
+                  <SelectItem value="Volleyball Excellence">Volleyball Excellence</SelectItem>
+                  <SelectItem value="Yoga & Meditation">Yoga & Meditation</SelectItem>
                   <SelectItem value="cricket">Cricket</SelectItem>
                   <SelectItem value="kho-kho">Kho-kho</SelectItem>
                   <SelectItem value="kabaddi">Kabaddi</SelectItem>
-                  <SelectItem value="yoga">Yoga</SelectItem>
-                  <SelectItem value="meditation">Meditation</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+
+            <div>
+              <Label>Preferred Training Time</Label>
+              <Select onValueChange={(value) => setFormData(prev => ({ ...prev, preferredTime: value }))}>
+                <SelectTrigger>
+                  <SelectValue placeholder="Select preferred time" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="morning">Morning (6-10 AM)</SelectItem>
+                  <SelectItem value="afternoon">Afternoon (12-4 PM)</SelectItem>
+                  <SelectItem value="evening">Evening (5-8 PM)</SelectItem>
+                  <SelectItem value="flexible">Flexible</SelectItem>
                 </SelectContent>
               </Select>
             </div>
             
             <div>
               <Label className="flex items-center space-x-1">
-                <Clock className="h-3 w-3" />
+                <Award className="h-3 w-3" />
                 <span>Experience Level</span>
               </Label>
               <RadioGroup
@@ -143,6 +211,40 @@ export function BookingForm({ onClose }: BookingFormProps) {
                 </div>
               </RadioGroup>
             </div>
+
+            <div>
+              <Label htmlFor="emergencyContact">Emergency Contact</Label>
+              <Input
+                id="emergencyContact"
+                value={formData.emergencyContact}
+                onChange={(e) => setFormData(prev => ({ ...prev, emergencyContact: e.target.value }))}
+                placeholder="Emergency contact number"
+                required
+              />
+            </div>
+
+            <div>
+              <Label htmlFor="medicalConditions">Medical Conditions (if any)</Label>
+              <Textarea
+                id="medicalConditions"
+                value={formData.medicalConditions}
+                onChange={(e) => setFormData(prev => ({ ...prev, medicalConditions: e.target.value }))}
+                placeholder="Any medical conditions we should know about..."
+                rows={2}
+              />
+            </div>
+
+            <div>
+              <Label htmlFor="goals">Your Goals</Label>
+              <Textarea
+                id="goals"
+                value={formData.goals}
+                onChange={(e) => setFormData(prev => ({ ...prev, goals: e.target.value }))}
+                placeholder="What do you want to achieve through training?"
+                rows={2}
+                required
+              />
+            </div>
             
             <div>
               <Label htmlFor="message">Additional Message (Optional)</Label>
@@ -150,14 +252,14 @@ export function BookingForm({ onClose }: BookingFormProps) {
                 id="message"
                 value={formData.message}
                 onChange={(e) => setFormData(prev => ({ ...prev, message: e.target.value }))}
-                placeholder="Tell us about your goals or any specific requirements..."
-                rows={3}
+                placeholder="Any other information you'd like to share..."
+                rows={2}
               />
             </div>
           </div>
           
           <Button type="submit" className="w-full" disabled={isSubmitting}>
-            {isSubmitting ? 'Booking...' : 'Book Free Consultation'}
+            {isSubmitting ? 'Saving...' : 'Book Free Consultation'}
           </Button>
           
           <p className="text-xs text-muted-foreground text-center">

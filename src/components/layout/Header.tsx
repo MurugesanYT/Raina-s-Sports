@@ -3,33 +3,19 @@ import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-import { Badge } from '@/components/ui/badge';
 import { 
   Trophy, 
   Menu, 
-  Search, 
-  Bell, 
-  User, 
   Moon, 
   Sun, 
   Settings,
-  Phone,
-  Mail
+  Phone
 } from 'lucide-react';
 import { navigationItems } from '@/lib/constants';
 import { useTheme } from 'next-themes';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-  DropdownMenuSeparator,
-} from '@/components/ui/dropdown-menu';
-import { Input } from '@/components/ui/input';
 
 export function Header() {
   const [isOpen, setIsOpen] = useState(false);
-  const [searchOpen, setSearchOpen] = useState(false);
   const location = useLocation();
   const { theme, setTheme } = useTheme();
 
@@ -74,16 +60,6 @@ export function Header() {
 
           {/* Action Buttons */}
           <div className="flex items-center space-x-2">
-            {/* Search Button */}
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => setSearchOpen(!searchOpen)}
-              className="hidden sm:flex"
-            >
-              <Search className="h-4 w-4" />
-            </Button>
-
             {/* Theme Toggle */}
             <Button
               variant="ghost"
@@ -94,42 +70,6 @@ export function Header() {
               <Sun className="h-4 w-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
               <Moon className="absolute h-4 w-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
             </Button>
-
-            {/* Notifications */}
-            <Button variant="ghost" size="icon" className="hidden sm:flex relative">
-              <Bell className="h-4 w-4" />
-              <Badge className="absolute -top-1 -right-1 h-4 w-4 p-0 flex items-center justify-center text-xs">
-                3
-              </Badge>
-            </Button>
-
-            {/* User Menu */}
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild className="hidden sm:flex">
-                <Button variant="ghost" size="icon">
-                  <User className="h-4 w-4" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-56">
-                <DropdownMenuItem>
-                  <User className="mr-2 h-4 w-4" />
-                  <span>Profile</span>
-                </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <Settings className="mr-2 h-4 w-4" />
-                  <span>Settings</span>
-                </DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem>
-                  <Phone className="mr-2 h-4 w-4" />
-                  <span>Contact Coach</span>
-                </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <Mail className="mr-2 h-4 w-4" />
-                  <span>Send Message</span>
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
 
             {/* Mobile Navigation */}
             <Sheet open={isOpen} onOpenChange={setIsOpen}>
@@ -167,25 +107,20 @@ export function Header() {
                       <Settings className="mr-2 h-4 w-4" />
                       Settings
                     </Button>
+                    <Button
+                      variant="outline"
+                      onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+                      className="w-full justify-start"
+                    >
+                      {theme === 'dark' ? <Sun className="mr-2 h-4 w-4" /> : <Moon className="mr-2 h-4 w-4" />}
+                      {theme === 'dark' ? 'Light Mode' : 'Dark Mode'}
+                    </Button>
                   </div>
                 </div>
               </SheetContent>
             </Sheet>
           </div>
         </div>
-
-        {/* Search Bar */}
-        {searchOpen && (
-          <div className="border-t p-4 bg-background/95 backdrop-blur">
-            <div className="max-w-md mx-auto">
-              <Input
-                placeholder="Search programs, schedules, reviews..."
-                className="w-full"
-                autoFocus
-              />
-            </div>
-          </div>
-        )}
       </header>
     </>
   );

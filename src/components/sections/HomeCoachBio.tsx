@@ -1,7 +1,6 @@
 
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
 import { coachDetails } from '@/lib/constants';
 import { 
   Goal, 
@@ -15,9 +14,6 @@ import {
   Award,
   Star,
   Calendar,
-  MessageCircle,
-  Download,
-  ExternalLink,
   CheckCircle,
   Quote
 } from 'lucide-react';
@@ -50,14 +46,14 @@ export function HomeCoachBio() {
           <Card className="overflow-hidden shadow-2xl border-0 bg-white/90 dark:bg-slate-800/90 backdrop-blur">
             <CardContent className="p-0">
               <div className="lg:flex">
-                {/* Image Section */}
-                <div className="lg:w-2/5 relative">
+                {/* Image Section - Made larger */}
+                <div className="lg:w-1/2 relative">
                   <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-orange-500/20"></div>
                   <img
                     src={coachDetails.profileImageUrl}
                     alt={coachDetails.dataAiHint}
                     data-ai-hint={coachDetails.dataAiHint}
-                    className="w-full h-80 lg:h-full object-cover"
+                    className="w-full h-96 lg:h-[600px] object-cover"
                     loading="eager"
                   />
                   <div className="absolute bottom-4 left-4 right-4">
@@ -74,7 +70,7 @@ export function HomeCoachBio() {
                 </div>
 
                 {/* Content Section */}
-                <div className="lg:w-3/5 p-8 lg:p-12">
+                <div className="lg:w-1/2 p-8 lg:p-12">
                   <div className="space-y-6">
                     {/* Header */}
                     <div>
@@ -154,29 +150,16 @@ export function HomeCoachBio() {
                       </div>
                     </div>
 
-                    {/* Contact & Actions */}
+                    {/* Contact Information */}
                     <div className="border-t pt-6">
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
-                        <div className="space-y-2">
-                          <div className="flex items-center space-x-2 text-sm">
-                            <Phone className="h-4 w-4 text-primary" />
-                            <span>{coachDetails.phone}</span>
-                          </div>
-                          <div className="flex items-center space-x-2 text-sm">
-                            <Mail className="h-4 w-4 text-primary" />
-                            <span>{coachDetails.email}</span>
-                          </div>
+                      <div className="space-y-2">
+                        <div className="flex items-center space-x-2 text-sm">
+                          <Phone className="h-4 w-4 text-primary" />
+                          <span>{coachDetails.phone}</span>
                         </div>
-                        
-                        <div className="flex flex-col space-y-2">
-                          <Button size="sm" className="w-full">
-                            <MessageCircle className="h-4 w-4 mr-2" />
-                            Book Consultation
-                          </Button>
-                          <Button variant="outline" size="sm" className="w-full">
-                            <Download className="h-4 w-4 mr-2" />
-                            Download Resume
-                          </Button>
+                        <div className="flex items-center space-x-2 text-sm">
+                          <Mail className="h-4 w-4 text-primary" />
+                          <span>{coachDetails.email}</span>
                         </div>
                       </div>
                     </div>

@@ -1,17 +1,16 @@
 
+import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
+import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
+import { BookingForm } from '@/components/forms/BookingForm';
 import { 
   Goal, 
   Volleyball, 
-  Users, 
-  Target, 
-  PersonStanding, 
-  Brain,
-  Clock,
-  Users2,
+  Users2, 
+  PersonStanding,
   TrendingUp,
   CheckCircle
 } from 'lucide-react';
@@ -21,11 +20,9 @@ const featuredPrograms = [
     title: 'Elite Football Training',
     description: 'Advanced football techniques and strategies for competitive players',
     icon: Goal,
-    duration: '12 weeks',
     level: 'Advanced',
     participants: 8,
     maxParticipants: 12,
-    price: '₹15,000',
     features: ['Professional Coaching', 'Video Analysis', 'Fitness Training', 'Match Preparation'],
     color: 'from-green-500 to-green-600'
   },
@@ -33,11 +30,9 @@ const featuredPrograms = [
     title: 'Volleyball Excellence',
     description: 'Master volleyball skills from basics to advanced techniques',
     icon: Volleyball,
-    duration: '10 weeks',
     level: 'Intermediate',
     participants: 15,
     maxParticipants: 20,
-    price: '₹12,000',
     features: ['Team Strategy', 'Spike Training', 'Defense Techniques', 'Tournament Prep'],
     color: 'from-blue-500 to-blue-600'
   },
@@ -45,17 +40,23 @@ const featuredPrograms = [
     title: 'Yoga & Meditation',
     description: 'Complete wellness program combining yoga and meditation',
     icon: PersonStanding,
-    duration: '8 weeks',
     level: 'All Levels',
     participants: 25,
     maxParticipants: 30,
-    price: '₹8,000',
     features: ['Stress Relief', 'Flexibility', 'Mental Clarity', 'Energy Boost'],
     color: 'from-purple-500 to-purple-600'
   }
 ];
 
 export function FeaturedPrograms() {
+  const [selectedProgram, setSelectedProgram] = useState<string>('');
+  const [showBooking, setShowBooking] = useState(false);
+
+  const handleEnrollClick = (programTitle: string) => {
+    setSelectedProgram(programTitle);
+    setShowBooking(true);
+  };
+
   return (
     <section className="py-16 bg-background">
       <div className="container mx-auto px-4">
@@ -90,14 +91,6 @@ export function FeaturedPrograms() {
                 <div className="space-y-3 mb-4">
                   <div className="flex items-center justify-between text-sm">
                     <span className="flex items-center">
-                      <Clock className="h-4 w-4 mr-1 text-muted-foreground" />
-                      Duration
-                    </span>
-                    <span className="font-medium">{program.duration}</span>
-                  </div>
-                  
-                  <div className="flex items-center justify-between text-sm">
-                    <span className="flex items-center">
                       <Users2 className="h-4 w-4 mr-1 text-muted-foreground" />
                       Participants
                     </span>
@@ -119,20 +112,32 @@ export function FeaturedPrograms() {
                   ))}
                 </div>
                 
-                <div className="flex items-center justify-between mb-4">
-                  <span className="text-2xl font-bold text-primary">{program.price}</span>
+                <div className="flex items-center justify-center mb-4">
                   <Badge variant="outline" className="text-green-600 border-green-600">
                     {program.maxParticipants - program.participants} spots left
                   </Badge>
                 </div>
                 
-                <Button className="w-full group-hover:bg-primary group-hover:text-primary-foreground">
+                <Button 
+                  className="w-full group-hover:bg-primary group-hover:text-primary-foreground"
+                  onClick={() => handleEnrollClick(program.title)}
+                >
                   Enroll Now
                 </Button>
               </CardContent>
             </Card>
           ))}
         </div>
+
+        {/* Booking Dialog */}
+        <Dialog open={showBooking} onOpenChange={setShowBooking}>
+          <DialogContent className="max-w-md">
+            <BookingForm 
+              onClose={() => setShowBooking(false)} 
+              selectedProgram={selectedProgram}
+            />
+          </DialogContent>
+        </Dialog>
       </div>
     </section>
   );
