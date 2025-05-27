@@ -46,23 +46,23 @@
   }
 
   .dark {
-    --background: 180 100% 4%;
-    --foreground: 180 60% 95.3%;
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
 
-    --card: 180 100% 4%;
-    --card-foreground: 180 60% 95.3%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
 
-    --popover: 180 100% 4%;
-    --popover-foreground: 180 60% 95.3%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
 
     --primary: 180 60% 95.3%;
     --primary-foreground: 180 100% 20%;
 
-    --secondary: 180 30% 15%;
-    --secondary-foreground: 180 60% 95.3%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
 
-    --muted: 180 30% 15%;
-    --muted-foreground: 180 20% 60%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
 
     --accent: 20 60% 49.8%;
     --accent-foreground: 0 0% 98%;
@@ -70,17 +70,17 @@
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 180 30% 15%;
-    --input: 180 30% 15%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
     --ring: 180 60% 95.3%;
 
-    --sidebar-background: 180 100% 4%;
-    --sidebar-foreground: 180 60% 95.3%;
+    --sidebar-background: 222.2 84% 4.9%;
+    --sidebar-foreground: 210 40% 98%;
     --sidebar-primary: 180 60% 95.3%;
     --sidebar-primary-foreground: 180 100% 20%;
-    --sidebar-accent: 180 30% 15%;
-    --sidebar-accent-foreground: 180 60% 95.3%;
-    --sidebar-border: 180 30% 15%;
+    --sidebar-accent: 217.2 32.6% 17.5%;
+    --sidebar-accent-foreground: 210 40% 98%;
+    --sidebar-border: 217.2 32.6% 17.5%;
     --sidebar-ring: 180 60% 95.3%;
   }
 }
@@ -94,11 +94,40 @@
     @apply bg-background text-foreground;
     font-feature-settings: "rlig" 1, "calt" 1;
   }
+
+  /* Ensure dark theme works properly for all components */
+  .dark * {
+    border-color: hsl(var(--border));
+  }
+
+  .dark .bg-white {
+    @apply bg-gray-800;
+  }
+
+  .dark .text-gray-900 {
+    @apply text-white;
+  }
+
+  .dark .text-gray-600 {
+    @apply text-gray-300;
+  }
+
+  .dark .text-gray-500 {
+    @apply text-gray-400;
+  }
+
+  .dark .border-gray-200 {
+    @apply border-gray-700;
+  }
 }
 
 @layer components {
   .sports-gradient {
     background: linear-gradient(135deg, hsl(180, 60%, 95.3%) 0%, hsl(180, 30%, 90%) 100%);
+  }
+  
+  .dark .sports-gradient {
+    background: linear-gradient(135deg, hsl(222.2, 84%, 4.9%) 0%, hsl(217.2, 32.6%, 17.5%) 100%);
   }
   
   .accent-gradient {

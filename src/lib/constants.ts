@@ -21,8 +21,8 @@ export const coachDetails = {
   certifications: ["FIFA Licensed Coach", "Yoga Alliance Certified", "Sports Science Degree"],
   qualifications: ["FIFA Licensed Coach", "Yoga Alliance Certified", "Sports Science Degree"],
   bio: "Passionate about developing athletes at all levels, from beginners to professionals. Specializing in football, volleyball, and holistic fitness training.",
-  image: "/placeholder.svg",
-  profileImageUrl: "/placeholder.svg",
+  image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+  profileImageUrl: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
   dataAiHint: "Professional sports coach Raina Kumar in action during training session",
   motto: "Excellence through dedication, growth through challenge, success through teamwork.",
   achievements: [
@@ -49,10 +49,13 @@ export const sportToIconMap = {
   'Elite Football Training': '⚽',
   'Volleyball Excellence': '🏐',
   'Yoga & Meditation': '🧘‍♀️',
-  'cricket': '🏏',
-  'kho-kho': '🏃‍♂️',
-  'kabaddi': '🤼‍♂️'
+  'Cricket Coaching': '🏏',
+  'Kho-Kho Training': '🏃‍♂️',
+  'Kabaddi Mastery': '🤼‍♂️'
 };
+
+// Import icons for statsData
+import { Users, Calendar, Target, Award } from 'lucide-react';
 
 export const statsData = [
   { label: 'Students Trained', value: 500, suffix: '+', icon: Users },
@@ -60,9 +63,6 @@ export const statsData = [
   { label: 'Success Rate', value: 95, suffix: '%', icon: Target },
   { label: 'Programs', value: 6, suffix: '', icon: Award }
 ];
-
-// Import icons for statsData
-import { Users, Calendar, Target, Award } from 'lucide-react';
 
 export const programsData = [
   {
