@@ -1,15 +1,15 @@
 
-import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
 import { Card, CardContent } from '@/components/ui/card';
 import { CalendarDays } from 'lucide-react';
-import { database } from '@/lib/firebase';
-import { ref, push } from 'firebase/database';
 import { BookingFormHeader } from './booking/BookingFormHeader';
 import { PersonalInfoSection } from './booking/PersonalInfoSection';
 import { ProgramSelectionSection } from './booking/ProgramSelectionSection';
 import { HealthGoalsSection } from './booking/HealthGoalsSection';
+import { useBookingFormData } from '@/hooks/useBookingFormData';
+import { useBookingFormValidation } from '@/hooks/useBookingFormValidation';
+import { useBookingFormSubmission } from '@/hooks/useBookingFormSubmission';
 
 interface BookingFormProps {
   onClose: () => void;
@@ -17,44 +17,15 @@ interface BookingFormProps {
 }
 
 export function BookingForm({ onClose, selectedProgram }: BookingFormProps) {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    sport: selectedProgram || '',
-    preferredTime: '',
-    experience: '',
-    age: '',
-    emergencyContact: '',
-    medicalConditions: '',
-    goals: '',
-    message: ''
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [errors, setErrors] = useState<Record<string, string>>({});
+  const { formData, handleInputChange, resetForm } = useBookingFormData(selectedProgram);
+  const { errors, validateForm, clearError } = useBookingFormValidation();
+  const { isSubmitting, submitForm } = useBookingFormSubmission();
   const { toast } = useToast();
-
-  const validateForm = () => {
-    const newErrors: Record<string, string> = {};
-    
-    if (!formData.name.trim()) newErrors.name = 'Full name is required';
-    if (!formData.email.trim()) newErrors.email = 'Email is required';
-    else if (!/\S+@\S+\.\S+/.test(formData.email)) newErrors.email = 'Invalid email format';
-    if (!formData.phone.trim()) newErrors.phone = 'Phone number is required';
-    if (!formData.sport) newErrors.sport = 'Please select a program';
-    if (!formData.age.trim()) newErrors.age = 'Age is required';
-    if (!formData.experience) newErrors.experience = 'Please select experience level';
-    if (!formData.emergencyContact.trim()) newErrors.emergencyContact = 'Emergency contact is required';
-    if (!formData.goals.trim()) newErrors.goals = 'Please tell us about your goals';
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!validateForm()) {
+    if (!validateForm(formData)) {
       toast({
         title: "Please fix the errors",
         description: "Some required fields are missing or invalid.",
@@ -63,71 +34,21 @@ export function BookingForm({ onClose, selectedProgram }: BookingFormProps) {
       return;
     }
 
-    setIsSubmitting(true);
-
-    try {
-      console.log('Attempting to save booking to Firebase...');
-      console.log('Database object:', database);
+    const success = await submitForm(formData);
+    
+    if (success) {
+      resetForm(selectedProgram);
       
-      if (!database) {
-        throw new Error('Firebase database not initialized');
-      }
-
-      const bookingsRef = ref(database, 'bookings');
-      const newBooking = {
-        ...formData,
-        timestamp: new Date().toISOString(),
-        status: 'pending',
-        submittedAt: Date.now()
-      };
-      
-      console.log('Saving booking data:', newBooking);
-      const result = await push(bookingsRef, newBooking);
-      console.log('Booking saved successfully:', result.key);
-
-      toast({
-        title: "Consultation Booked Successfully! 🎉",
-        description: "We'll contact you within 24 hours to confirm your free consultation.",
-      });
-
-      // Reset form
-      setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        sport: selectedProgram || '',
-        preferredTime: '',
-        experience: '',
-        age: '',
-        emergencyContact: '',
-        medicalConditions: '',
-        goals: '',
-        message: ''
-      });
-      setErrors({});
-
       // Close modal after a short delay
       setTimeout(() => {
         onClose();
       }, 2000);
-
-    } catch (error) {
-      console.error('Detailed error saving booking:', error);
-      toast({
-        title: "Booking Failed",
-        description: `Failed to save your booking: ${error instanceof Error ? error.message : 'Unknown error'}. Please try again.`,
-        variant: "destructive"
-      });
-    } finally {
-      setIsSubmitting(false);
     }
   };
 
-  const handleInputChange = (field: string, value: string) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
-    if (errors[field]) {
-      setErrors(prev => ({ ...prev, [field]: '' }));
-    }
+  const handleInputChangeWithValidation = (field: string, value: string) => {
+    handleInputChange(field, value);
+    clearError(field);
   };
 
   return (
@@ -139,19 +60,19 @@ export function BookingForm({ onClose, selectedProgram }: BookingFormProps) {
           <PersonalInfoSection 
             formData={formData}
             errors={errors}
-            onInputChange={handleInputChange}
+            onInputChange={handleInputChangeWithValidation}
           />
 
           <ProgramSelectionSection 
             formData={formData}
             errors={errors}
-            onInputChange={handleInputChange}
+            onInputChange={handleInputChangeWithValidation}
           />
 
           <HealthGoalsSection 
             formData={formData}
             errors={errors}
-            onInputChange={handleInputChange}
+            onInputChange={handleInputChangeWithValidation}
           />
           
           <div className="flex flex-col space-y-4">
