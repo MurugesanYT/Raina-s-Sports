@@ -8,27 +8,27 @@ export const navigationItems = [
 ];
 
 export const siteConfig = {
-  name: "Raina's Sports Academy",
+  name: "Suresh's Sports Academy",
   description: "Premier sports training and coaching academy",
-  url: "https://rainas-sports.com",
+  url: "https://suresh-sports.com",
 };
 
 export const coachDetails = {
-  name: "Raina Kumar",
-  title: "Professional Sports Coach & Fitness Expert",
-  profession: "Professional Sports Coach & Fitness Expert",
+  name: "P.T. Suresh",
+  title: "Professional Sports Coach & Physical Education Expert",
+  profession: "Professional Sports Coach & Physical Education Expert",
   experience: "15+ Years",
-  certifications: ["FIFA Licensed Coach", "Yoga Alliance Certified", "Sports Science Degree"],
-  qualifications: ["FIFA Licensed Coach", "Yoga Alliance Certified", "Sports Science Degree"],
-  bio: "Passionate about developing athletes at all levels, from beginners to professionals. Specializing in football, volleyball, and holistic fitness training.",
-  image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
-  profileImageUrl: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
-  dataAiHint: "Professional sports coach Raina Kumar in action during training session",
+  certifications: ["BCA (Bachelor of Computer Applications)", "B.P.Ed (Bachelor of Physical Education)"],
+  qualifications: ["BCA (Bachelor of Computer Applications)", "B.P.Ed (Bachelor of Physical Education)"],
+  bio: "Passionate about developing athletes at all levels, from beginners to professionals. Specializing in football, volleyball, kho-kho, kabaddi, cricket, yoga and meditation training.",
+  image: "https://i.ibb.co/TBCcTCXC/P-T-SURESH-SIR-PHOTO-FOR-SITE.jpg",
+  profileImageUrl: "https://i.ibb.co/TBCcTCXC/P-T-SURESH-SIR-PHOTO-FOR-SITE.jpg",
+  dataAiHint: "coach portrait",
   motto: "Excellence through dedication, growth through challenge, success through teamwork.",
   achievements: [
     "Trained 500+ athletes",
     "95% student success rate",
-    "FIFA certified coach",
+    "BCA & B.P.Ed qualified",
     "15+ years experience",
     "Multiple championship wins",
     "Youth development expert"
@@ -36,13 +36,14 @@ export const coachDetails = {
   specialties: [
     { name: "Football", icon: "Goal" },
     { name: "Volleyball", icon: "Volleyball" },
-    { name: "Fitness", icon: "PersonStanding" },
-    { name: "Yoga", icon: "Brain" },
-    { name: "Team Building", icon: "Users" },
-    { name: "Goal Setting", icon: "Target" }
+    { name: "Kho-kho", icon: "Users" },
+    { name: "Kabaddi", icon: "Users2" },
+    { name: "Cricket", icon: "Target" },
+    { name: "Yoga", icon: "PersonStanding" },
+    { name: "Meditation", icon: "Brain" }
   ],
-  phone: "+91 98765 43210",
-  email: "raina@rainasports.com"
+  phone: "+918667603395",
+  email: "sureshtreferee@gmail.com"
 };
 
 export const sportToIconMap = {
@@ -68,19 +69,19 @@ export const programsData = [
   {
     id: 'elite-football',
     title: 'Elite Football Training',
-    description: 'Professional football coaching for all skill levels',
+    description: 'Professional football coaching for all skill levels with comprehensive technical and tactical development',
     icon: '⚽',
     duration: '90 minutes',
     level: 'All Levels',
     maxParticipants: 15,
     price: 2500,
     features: [
-      'Technical skills development',
-      'Tactical understanding',
-      'Physical conditioning',
-      'Mental preparation',
-      'Match simulation',
-      'Individual feedback'
+      'Technical skills development - Ball control, passing, shooting',
+      'Tactical understanding - Formation play, positioning',
+      'Physical conditioning - Strength, speed, endurance',
+      'Mental preparation - Focus, confidence building',
+      'Match simulation - Real game scenarios',
+      'Individual feedback - Personal skill assessment'
     ],
     schedule: [
       { day: 'Monday', time: '6:00 AM - 7:30 AM' },
@@ -92,19 +93,19 @@ export const programsData = [
   {
     id: 'volleyball-excellence',
     title: 'Volleyball Excellence',
-    description: 'Master the fundamentals and advanced techniques of volleyball',
+    description: 'Master volleyball fundamentals and advanced techniques with focus on team coordination and competitive play',
     icon: '🏐',
     duration: '75 minutes',
     level: 'Beginner to Advanced',
     maxParticipants: 12,
     price: 2000,
     features: [
-      'Serving techniques',
-      'Spiking and blocking',
-      'Team coordination',
-      'Court positioning',
-      'Game strategies',
-      'Fitness conditioning'
+      'Serving techniques - Float, jump, and topspin serves',
+      'Spiking and blocking - Attack and defense mechanics',
+      'Team coordination - Communication and sync',
+      'Court positioning - Rotation and movement strategies',
+      'Game strategies - Offensive and defensive plays',
+      'Fitness conditioning - Jumping, agility, core strength'
     ],
     schedule: [
       { day: 'Tuesday', time: '5:30 AM - 6:45 AM' },
@@ -115,19 +116,19 @@ export const programsData = [
   {
     id: 'yoga-meditation',
     title: 'Yoga & Meditation',
-    description: 'Mind-body wellness through yoga and meditation practices',
+    description: 'Holistic wellness through traditional yoga practices and mindfulness meditation for mental and physical balance',
     icon: '🧘‍♀️',
     duration: '60 minutes',
     level: 'All Levels',
     maxParticipants: 20,
     price: 1500,
     features: [
-      'Flexibility training',
-      'Stress relief',
-      'Mental clarity',
-      'Breathing techniques',
-      'Balance improvement',
-      'Mindfulness practice'
+      'Flexibility training - Asanas for improved mobility',
+      'Stress relief - Relaxation and tension release',
+      'Mental clarity - Focus and concentration enhancement',
+      'Breathing techniques - Pranayama practices',
+      'Balance improvement - Physical and mental stability',
+      'Mindfulness practice - Present moment awareness'
     ],
     schedule: [
       { day: 'Monday', time: '7:00 AM - 8:00 AM' },
@@ -139,19 +140,19 @@ export const programsData = [
   {
     id: 'cricket-coaching',
     title: 'Cricket Coaching',
-    description: 'Comprehensive cricket training covering all aspects of the game',
+    description: 'Comprehensive cricket training covering batting, bowling, fielding with modern techniques and match strategies',
     icon: '🏏',
     duration: '120 minutes',
     level: 'Beginner to Professional',
     maxParticipants: 16,
     price: 3000,
     features: [
-      'Batting techniques',
-      'Bowling variations',
-      'Fielding skills',
-      'Match tactics',
-      'Fitness training',
-      'Mental toughness'
+      'Batting techniques - Stance, grip, shot selection, timing',
+      'Bowling variations - Pace, spin, line and length control',
+      'Fielding skills - Catching, throwing, ground fielding',
+      'Match tactics - Game awareness, strategy implementation',
+      'Fitness training - Cricket-specific conditioning',
+      'Mental toughness - Pressure handling, concentration'
     ],
     schedule: [
       { day: 'Tuesday', time: '4:00 PM - 6:00 PM' },
@@ -162,19 +163,19 @@ export const programsData = [
   {
     id: 'kho-kho-training',
     title: 'Kho-Kho Training',
-    description: 'Traditional Indian sport focusing on speed, agility, and strategy',
+    description: 'Traditional Indian sport training focusing on speed, agility, strategy, and team coordination for competitive play',
     icon: '🏃‍♂️',
     duration: '90 minutes',
     level: 'All Levels',
     maxParticipants: 14,
     price: 1800,
     features: [
-      'Speed development',
-      'Agility training',
-      'Quick reflexes',
-      'Team coordination',
-      'Strategic thinking',
-      'Endurance building'
+      'Speed development - Sprint training, acceleration drills',
+      'Agility training - Quick direction changes, footwork',
+      'Quick reflexes - Reaction time improvement',
+      'Team coordination - Chain formation, communication',
+      'Strategic thinking - Chasing and defending tactics',
+      'Endurance building - Stamina for continuous play'
     ],
     schedule: [
       { day: 'Monday', time: '5:00 PM - 6:30 PM' },
@@ -184,19 +185,19 @@ export const programsData = [
   {
     id: 'kabaddi-mastery',
     title: 'Kabaddi Mastery',
-    description: 'Master the ancient sport of Kabaddi with modern training methods',
+    description: 'Master the ancient sport of Kabaddi with modern training methods, focusing on raiding and defensive strategies',
     icon: '🤼‍♂️',
     duration: '90 minutes',
     level: 'Intermediate to Advanced',
     maxParticipants: 12,
     price: 2200,
     features: [
-      'Raiding techniques',
-      'Defensive strategies',
-      'Physical strength',
-      'Mental toughness',
-      'Team tactics',
-      'Competition preparation'
+      'Raiding techniques - Toe touch, hand touch, advanced raids',
+      'Defensive strategies - Chain formation, ankle holds',
+      'Physical strength - Core, leg, and grip strength',
+      'Mental toughness - Breath control, pressure handling',
+      'Team tactics - Coordination between raiders and defenders',
+      'Competition preparation - Tournament-level training'
     ],
     schedule: [
       { day: 'Wednesday', time: '5:00 PM - 6:30 PM' },

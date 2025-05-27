@@ -6,6 +6,7 @@ import {
   Goal, 
   Volleyball, 
   Users, 
+  Users2,
   Target, 
   PersonStanding, 
   Brain,
@@ -22,6 +23,7 @@ const iconMap = {
   Goal,
   Volleyball,
   Users,
+  Users2,
   Target,
   PersonStanding,
   Brain
