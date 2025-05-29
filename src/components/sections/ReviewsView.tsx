@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { ref, get, push } from 'firebase/database';
@@ -135,8 +134,28 @@ export function ReviewsView() {
   }
 
   return (
-    <div className="min-h-screen py-16 bg-gradient-to-br from-teal-50 to-white">
-      <div className="container mx-auto px-4">
+    <div className="min-h-screen py-16 bg-gradient-to-br from-teal-50 to-white dark:from-slate-900 dark:to-slate-800 relative overflow-hidden">
+      {/* Indian-themed background images */}
+      <div className="absolute inset-0 opacity-5 dark:opacity-10">
+        <div 
+          className="absolute top-10 right-10 w-32 h-32 bg-cover bg-center rounded-full"
+          style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1466442929976-97f336a657be?w=400)' }}
+        />
+        <div 
+          className="absolute bottom-20 left-10 w-24 h-24 bg-cover bg-center rounded-full"
+          style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1492321936769-b49830bc1d1e?w=400)' }}
+        />
+        <div 
+          className="absolute top-1/2 left-1/4 w-20 h-20 bg-cover bg-center rounded-full"
+          style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1469041797191-50ace28483c3?w=400)' }}
+        />
+        <div 
+          className="absolute bottom-1/3 right-1/4 w-28 h-28 bg-cover bg-center rounded-full opacity-60"
+          style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1466442929976-97f336a657be?w=400)' }}
+        />
+      </div>
+
+      <div className="container mx-auto px-4 relative z-10">
         {/* Header */}
         <div className="text-center mb-12">
           <div className="flex items-center justify-center space-x-3 mb-4">
@@ -150,7 +169,7 @@ export function ReviewsView() {
 
         <div className="max-w-4xl mx-auto">
           {/* Review Submission Form */}
-          <Card className="mb-12">
+          <Card className="mb-12 backdrop-blur-sm bg-white/80 dark:bg-slate-800/80">
             <CardHeader>
               <CardTitle className="flex items-center space-x-2">
                 <Send className="h-5 w-5" />
@@ -241,7 +260,7 @@ export function ReviewsView() {
           ) : (
             <div className="space-y-6">
               {reviews.map((review) => (
-                <Card key={review.id} className="hover:shadow-md transition-shadow duration-300">
+                <Card key={review.id} className="hover:shadow-md transition-shadow duration-300 backdrop-blur-sm bg-white/90 dark:bg-slate-800/90">
                   <CardContent className="p-6">
                     <div className="flex items-start justify-between mb-4">
                       <div>
