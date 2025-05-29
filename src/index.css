@@ -95,29 +95,103 @@
     font-feature-settings: "rlig" 1, "calt" 1;
   }
 
-  /* Ensure dark theme works properly for all components */
-  .dark * {
-    border-color: hsl(var(--border));
+  /* Enhanced dark theme styles for better visibility */
+  .dark {
+    color-scheme: dark;
+  }
+
+  /* Fix button visibility in dark mode */
+  .dark button {
+    @apply text-foreground;
   }
 
   .dark .bg-white {
-    @apply bg-gray-800;
+    @apply bg-card;
   }
 
   .dark .text-gray-900 {
-    @apply text-white;
+    @apply text-foreground;
   }
 
   .dark .text-gray-600 {
-    @apply text-gray-300;
+    @apply text-muted-foreground;
   }
 
   .dark .text-gray-500 {
-    @apply text-gray-400;
+    @apply text-muted-foreground;
   }
 
   .dark .border-gray-200 {
-    @apply border-gray-700;
+    @apply border-border;
+  }
+
+  /* Ensure outline buttons are visible in dark mode */
+  .dark button[variant="outline"], 
+  .dark .variant-outline {
+    @apply border-border bg-background text-foreground;
+  }
+
+  .dark button[variant="outline"]:hover, 
+  .dark .variant-outline:hover {
+    @apply bg-accent text-accent-foreground;
+  }
+
+  /* Ensure secondary buttons are visible in dark mode */
+  .dark button[variant="secondary"], 
+  .dark .variant-secondary {
+    @apply bg-secondary text-secondary-foreground;
+  }
+
+  /* Ensure ghost buttons are visible in dark mode */
+  .dark button[variant="ghost"], 
+  .dark .variant-ghost {
+    @apply text-foreground;
+  }
+
+  .dark button[variant="ghost"]:hover, 
+  .dark .variant-ghost:hover {
+    @apply bg-accent text-accent-foreground;
+  }
+
+  /* Fix tab styling in dark mode */
+  .dark [data-state="active"] {
+    @apply bg-background text-foreground;
+  }
+
+  /* Ensure proper card backgrounds in dark mode */
+  .dark .bg-white\/90 {
+    @apply bg-card/90;
+  }
+
+  .dark .bg-white\/80 {
+    @apply bg-card/80;
+  }
+
+  .dark .bg-white\/50 {
+    @apply bg-card/50;
+  }
+
+  /* Fix gradient backgrounds for dark mode */
+  .dark .from-white {
+    @apply from-background;
+  }
+
+  .dark .to-white {
+    @apply to-background;
+  }
+
+  .dark .via-white {
+    @apply via-background;
+  }
+
+  /* Ensure proper text contrast in dark mode */
+  .dark .text-black {
+    @apply text-foreground;
+  }
+
+  /* Fix badge visibility in dark mode */
+  .dark .bg-white\/20 {
+    @apply bg-background/20;
   }
 }
 
@@ -132,5 +206,18 @@
   
   .accent-gradient {
     background: linear-gradient(135deg, hsl(20, 60%, 49.8%) 0%, hsl(20, 70%, 45%) 100%);
+  }
+
+  /* Enhanced button styles for better visibility */
+  .btn-visible {
+    @apply border border-border bg-background text-foreground;
+  }
+
+  .dark .btn-visible {
+    @apply border-border bg-background text-foreground;
+  }
+
+  .btn-visible:hover {
+    @apply bg-accent text-accent-foreground;
   }
 }
