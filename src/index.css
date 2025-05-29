@@ -100,9 +100,9 @@
     color-scheme: dark;
   }
 
-  /* Fix button visibility in dark mode */
-  .dark button {
-    @apply text-foreground;
+  /* Enhanced button visibility in dark mode - excluding tabs */
+  .dark button:not([role="tab"]) {
+    @apply text-slate-100;
   }
 
   .dark .bg-white {
@@ -125,35 +125,46 @@
     @apply border-border;
   }
 
-  /* Ensure outline buttons are visible in dark mode */
-  .dark button[variant="outline"], 
-  .dark .variant-outline {
-    @apply border-border bg-background text-foreground;
+  /* Enhanced outline buttons visibility in dark mode */
+  .dark button[data-variant="outline"]:not([role="tab"]), 
+  .dark .variant-outline:not([role="tab"]) {
+    @apply border-slate-600 bg-slate-700 text-slate-100;
   }
 
-  .dark button[variant="outline"]:hover, 
-  .dark .variant-outline:hover {
-    @apply bg-accent text-accent-foreground;
+  .dark button[data-variant="outline"]:hover:not([role="tab"]), 
+  .dark .variant-outline:hover:not([role="tab"]) {
+    @apply bg-slate-600 text-slate-100;
   }
 
-  /* Ensure secondary buttons are visible in dark mode */
-  .dark button[variant="secondary"], 
-  .dark .variant-secondary {
-    @apply bg-secondary text-secondary-foreground;
+  /* Enhanced secondary buttons visibility in dark mode */
+  .dark button[data-variant="secondary"]:not([role="tab"]), 
+  .dark .variant-secondary:not([role="tab"]) {
+    @apply bg-slate-600 text-slate-100;
   }
 
-  /* Ensure ghost buttons are visible in dark mode */
-  .dark button[variant="ghost"], 
-  .dark .variant-ghost {
-    @apply text-foreground;
+  .dark button[data-variant="secondary"]:hover:not([role="tab"]), 
+  .dark .variant-secondary:hover:not([role="tab"]) {
+    @apply bg-slate-500 text-slate-100;
   }
 
-  .dark button[variant="ghost"]:hover, 
-  .dark .variant-ghost:hover {
-    @apply bg-accent text-accent-foreground;
+  /* Enhanced ghost buttons visibility in dark mode */
+  .dark button[data-variant="ghost"]:not([role="tab"]), 
+  .dark .variant-ghost:not([role="tab"]) {
+    @apply text-slate-200 bg-slate-800/50;
   }
 
-  /* Fix tab styling in dark mode */
+  .dark button[data-variant="ghost"]:hover:not([role="tab"]), 
+  .dark .variant-ghost:hover:not([role="tab"]) {
+    @apply bg-slate-700 text-slate-100;
+  }
+
+  /* Enhanced default buttons visibility in dark mode */
+  .dark button[data-variant="default"]:not([role="tab"]), 
+  .dark .variant-default:not([role="tab"]) {
+    @apply bg-primary text-primary-foreground;
+  }
+
+  /* Fix tab styling in dark mode - keep existing behavior */
   .dark [data-state="active"] {
     @apply bg-background text-foreground;
   }
@@ -193,6 +204,15 @@
   .dark .bg-white\/20 {
     @apply bg-background/20;
   }
+
+  /* Additional button visibility enhancements */
+  .dark button {
+    @apply border-slate-600;
+  }
+
+  .dark button:not([role="tab"]):not([data-variant="ghost"]) {
+    @apply shadow-sm;
+  }
 }
 
 @layer components {
@@ -214,7 +234,7 @@
   }
 
   .dark .btn-visible {
-    @apply border-border bg-background text-foreground;
+    @apply border-slate-600 bg-slate-700 text-slate-100;
   }
 
   .btn-visible:hover {
